@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build AI Slot Tool Finder.app — the menu bar machine.
+# Build AI Tool Shuffle.app — the menu bar machine.
 #
 #   ./build.sh            build into ./dist
 #   ./build.sh --install  build, then install to /Applications and launch it
@@ -10,7 +10,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-NAME="AI Slot Tool Finder"
+NAME="AI Tool Shuffle"
 BIN="AISlotToolFinder"
 VERSION="1.0.0"
 APP="dist/$NAME.app"

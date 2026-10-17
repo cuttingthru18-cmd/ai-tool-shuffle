@@ -1,4 +1,4 @@
-// AI Slot Tool Finder — the lever, in your menu bar.
+// AI Tool Shuffle — the lever, in your menu bar.
 //
 // The site's whole trick is that pulling makes you want to pull again. That does not
 // survive being turned into a list of links, so this is not a list of links: it is the
@@ -24,7 +24,7 @@ struct Tool: Codable, Hashable {
     let u: String   // url
 }
 
-let FEED_URL = URL(string: "https://cuttingthru18-cmd.github.io/ai-slot-tool-finder/tools.json")!
+let FEED_URL = URL(string: "https://cuttingthru18-cmd.github.io/ai-tool-shuffle/tools.json")!
 let CATEGORIES = ["all", "fun", "agent", "creator", "candy", "win"]
 
 // MARK: - Shelf
@@ -181,7 +181,7 @@ struct SlotView: View {
     private var header: some View {
         HStack {
             Text("🎰").font(.system(size: 13))
-            Text("AI SLOT TOOL FINDER")
+            Text("AI TOOL SHUFFLE")
                 .font(.system(size: 11, weight: .bold, design: .monospaced))
                 .foregroundColor(Color(hex: 0xFFD700))
             Spacer()
@@ -319,7 +319,7 @@ struct SlotView: View {
                 .font(.system(size: 9, design: .monospaced))
                 .foregroundColor(Color(hex: 0x8a8478))
                 .onTapGesture {
-                    NSWorkspace.shared.open(URL(string: "https://cuttingthru18-cmd.github.io/ai-slot-tool-finder/")!)
+                    NSWorkspace.shared.open(URL(string: "https://cuttingthru18-cmd.github.io/ai-tool-shuffle/")!)
                 }
             Spacer()
             Text("quit")

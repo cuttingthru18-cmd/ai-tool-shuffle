@@ -1,4 +1,4 @@
-# 🎰 AI Slot Tool Finder
+# 🎰 AI Tool Shuffle
 
 A free, open-source web app for discovering curated tools — pull a slot-machine lever, get a tool you'd probably never find yourself.
 
@@ -10,11 +10,11 @@ A free, open-source web app for discovering curated tools — pull a slot-machin
 
 Maintained by **YL MRKT**. AI research agents assisted with discovery; **every listed tool was manually reviewed before inclusion.**
 
-![AI Slot Tool Finder](screenshots/main.png)
+![AI Tool Shuffle](screenshots/main.png)
 
 ## Try it
 
-**[▶ Play it here](https://cuttingthru18-cmd.github.io/ai-slot-tool-finder/)** — any browser, any device.
+**[▶ Play it here](https://cuttingthru18-cmd.github.io/ai-tool-shuffle/)** — any browser, any device.
 
 Or run it locally: download `index.html` and open it. That's the entire install.
 
@@ -69,8 +69,8 @@ The machine, one click away, from inside any app — no tab, no URL, no signup.
 
 **Install it:**
 
-1. Download **`AI-Slot-Tool-Finder-macOS.zip`** from the [latest release](../../releases/latest) and unzip it
-2. Drag **AI Slot Tool Finder.app** to your **Applications** folder
+1. Download the **macOS zip** from the [latest release](../../releases/latest) and unzip it
+2. Drag **AI Tool Shuffle.app** to your **Applications** folder
 3. **Right-click the app → Open**, then click **Open** in the dialog
 
 > **Step 3 matters, and only the first time.** The app isn't signed with a paid Apple
@@ -78,7 +78,7 @@ The machine, one click away, from inside any app — no tab, no URL, no signup.
 > from an unidentified developer."* Right-click → Open is macOS's built-in way to say
 > you trust it. After that it opens normally, forever.
 >
-> Prefer the terminal? `xattr -dr com.apple.quarantine "/Applications/AI Slot Tool Finder.app"`
+> Prefer the terminal? `xattr -dr com.apple.quarantine "/Applications/AI Tool Shuffle.app"`
 
 Then click **🎰** in your menu bar and pull the lever. To have it there every morning:
 **System Settings → General → Login Items → +** and add it.
@@ -86,8 +86,8 @@ Then click **🎰** in your menu bar and pull the lever. To have it there every 
 **Or build it yourself** — it's one Swift file, no dependencies:
 
 ```sh
-git clone https://github.com/cuttingthru18-cmd/ai-slot-tool-finder.git
-cd ai-slot-tool-finder/menubar
+git clone https://github.com/cuttingthru18-cmd/ai-tool-shuffle.git
+cd ai-tool-shuffle/menubar
 ./build.sh --install
 ```
 
@@ -112,7 +112,7 @@ tool. Same no-repeat bag — you'll see all 545 before any repeat. Filter by cat
 so the two can't drift. It's served from GitHub Pages and free to use:
 
 ```
-https://cuttingthru18-cmd.github.io/ai-slot-tool-finder/tools.json
+https://cuttingthru18-cmd.github.io/ai-tool-shuffle/tools.json
 ```
 
 ```json

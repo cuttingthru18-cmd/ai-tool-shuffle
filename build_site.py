@@ -27,7 +27,7 @@ HTML = r"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>🎰 AI Slot Tool Finder</title>
+<title>🎰 AI Tool Shuffle</title>
 <meta name="description" content="Pull the lever, discover a tool you'd never find yourself — __N__ hand-curated free tools, toys, and AI wonders. No signup, no tracking, one HTML file.">
 <style>
 :root{
@@ -263,7 +263,7 @@ footer a{color:var(--gold-dim)}
 
 <canvas id="bg"></canvas><div id="vig"></div>
 
-<h1>🎰 AI Slot Tool Finder</h1>
+<h1>🎰 AI Tool Shuffle</h1>
 <p class="sub"><b>__N__ hand-curated</b> tools, toys and AI wonders — the stuff you'd never find on your own. Pick a category, <b>pull the lever</b>, and the winner opens instantly. Free forever, no signup.</p>
 
 <div id="cats"></div>
@@ -302,7 +302,7 @@ footer a{color:var(--gold-dim)}
 </div>
 
 <div id="inv"></div>
-<footer>No signup. No tracking. One HTML file. · <a href="https://github.com/cuttingthru18-cmd/ai-slot-tool-finder" target="_blank" rel="noopener">source</a></footer>
+<footer>No signup. No tracking. One HTML file. · <a href="https://github.com/cuttingthru18-cmd/ai-tool-shuffle" target="_blank" rel="noopener">source</a></footer>
 
 <script>
 var TOYS=__TOYS__;
