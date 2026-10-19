@@ -249,6 +249,54 @@ footer a{color:var(--gold-dim)}
 #found{font:700 11px var(--mono); letter-spacing:.08em; color:var(--dim)}
 #found b{color:var(--gold); font-weight:700; font-variant-numeric:tabular-nums}
 
+/* ---------- email signup pop-up ----------
+   Bottom sheet on phones (most visits come from an Instagram in-app browser), centred
+   modal on desktop. Shows once: after ~12s or halfway through the shelf, whichever first. */
+#es{position:fixed !important; inset:0; z-index:50 !important; display:none;
+  align-items:flex-end; justify-content:center; background:rgba(8,7,6,.62);
+  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px)}
+#es.open{display:flex; animation:esfade .25s ease-out}
+@keyframes esfade{from{opacity:0} to{opacity:1}}
+#es .sheet{position:relative; width:100%; max-width:520px; color:var(--text);
+  background:linear-gradient(#241f16,#171410); border:2px solid var(--line); border-bottom:none;
+  border-radius:18px 18px 0 0; padding:26px 22px calc(22px + env(safe-area-inset-bottom));
+  box-shadow:inset 0 1px 0 rgba(255,215,0,.10), 0 -18px 50px rgba(0,0,0,.6), var(--glow);
+  animation:esup .38s cubic-bezier(.22,1.2,.36,1)}
+@keyframes esup{from{transform:translateY(100%)} to{transform:none}}
+#es .sheet:focus{outline:none}
+#es h2{margin:0 30px 8px 0; font-size:21px; line-height:1.3; letter-spacing:-.01em}
+#es p{margin:0 0 16px; color:var(--dim); font-size:14.5px; line-height:1.55}
+#es form{display:flex; flex-direction:column; gap:10px; margin:0}
+#es input[type=email]{width:100%; background:#0e0d0b; color:var(--text); border:1.5px solid var(--line);
+  border-radius:10px; padding:13px 14px; font:400 16px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,sans-serif}
+#es input[type=email]:focus{outline:none; border-color:var(--gold); box-shadow:var(--glow)}
+#es input[aria-invalid=true]{border-color:#e0533f}
+#es .go{background:var(--gold); color:#141310; border:1.5px solid var(--gold); border-radius:10px;
+  padding:13px 14px; font:700 13px var(--mono); letter-spacing:.06em; cursor:pointer; transition:.15s}
+#es .go:hover{box-shadow:var(--glow)}
+#es .go[disabled]{opacity:.6; cursor:wait}
+#es .err{min-height:1.2em; margin:0; font:400 12px/1.4 var(--mono); color:#f08a78}
+#es .nah{display:block; margin:12px auto 0; background:none; border:none; color:var(--dim);
+  font:400 12px var(--mono); text-decoration:underline; cursor:pointer; padding:6px}
+#es .nah:hover{color:var(--text)}
+#es .x{position:absolute; top:10px; right:10px; width:40px; height:40px; border-radius:50%;
+  background:transparent; border:1px solid var(--line); color:var(--dim); font-size:20px; line-height:1;
+  cursor:pointer}
+#es .x:hover{color:var(--gold); border-color:var(--gold-dim)}
+#es .x:focus-visible,#es .go:focus-visible,#es .nah:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+#es .hp{position:absolute !important; left:-9999px; width:1px; height:1px; overflow:hidden}
+#es .done{display:none; text-align:center; padding:18px 0 8px}
+#es .done h2{margin:0 0 6px; color:var(--gold)}
+#es.ok .done{display:block}
+#es.ok .ask{display:none}
+@media (min-width:640px){
+  #es{align-items:center; padding:20px}
+  #es .sheet{border-bottom:2px solid var(--line); border-radius:18px; padding:30px 28px 24px;
+    box-shadow:inset 0 1px 0 rgba(255,215,0,.10), 0 22px 60px rgba(0,0,0,.6), var(--glow);
+    animation:espop .32s cubic-bezier(.22,1.3,.36,1)}
+  @keyframes espop{from{opacity:0; transform:translateY(12px) scale(.96)} to{opacity:1; transform:none}}
+}
+
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important; transition:none !important}
   .reel.blur .strip{filter:none}
@@ -304,6 +352,26 @@ footer a{color:var(--gold-dim)}
 <div id="inv"></div>
 <footer>No signup. No tracking. One HTML file. · <a href="https://github.com/cuttingthru18-cmd/ai-tool-shuffle" target="_blank" rel="noopener">source</a></footer>
 
+<div id="es" role="dialog" aria-modal="true" aria-labelledby="es-h" aria-hidden="true">
+  <div class="sheet" tabindex="-1">
+    <button class="x" type="button" aria-label="Close">&times;</button>
+    <div class="ask">
+      <h2 id="es-h">new free AI tools drop every week. get them before everyone else 👀</h2>
+      <p>the best new free tools, straight to your inbox when we add them. free forever, no spam, unsubscribe anytime.</p>
+      <form novalidate>
+        <label for="es-email" class="hp">Email address</label>
+        <input id="es-email" type="email" name="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required aria-describedby="es-err">
+        <div class="hp" aria-hidden="true"><input type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
+        <p class="err" id="es-err" role="alert"></p>
+        <button class="go" type="submit">send me the tools</button>
+      </form>
+      <button class="nah" type="button">nah, i'll keep googling</button>
+    </div>
+    <div class="done" role="status">
+      <h2>you're in 🔥 watch your inbox</h2>
+    </div>
+  </div>
+</div>
 <script>
 var TOYS=__TOYS__;
 
@@ -822,6 +890,102 @@ document.getElementById('inv').innerHTML =
       return '<a href="'+t.u+'" target="_blank" rel="noopener">'+t.e+' '+t.n+'</a>';
     }).join('')
   + '</div></details>';
+
+/* ---- email signup pop-up ----
+   Signups go to FormSubmit, which emails them to the inbox below. No account, no server.
+   Shown once: ~12s in, or halfway through the shelf, whichever comes first. A dismiss
+   keeps it away for 7 days; a signup keeps it away for good. */
+var SIGNUP_ENDPOINT='https://formsubmit.co/ajax/__SIGNUP_TO__';
+(function(){
+  var KEY='astf.signup', WAIT=12000, AGAIN=7*864e5;
+  var es=document.getElementById('es'); if(!es) return;
+  var sheet=es.querySelector('.sheet'), form=es.querySelector('form'),
+      inp=document.getElementById('es-email'), err=document.getElementById('es-err'),
+      go=es.querySelector('.go'), hp=es.querySelector('input[name=_honey]');
+  function get(){ try{ return JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){ return null; } }
+  function put(s){ try{ localStorage.setItem(KEY, JSON.stringify({s:s, t:Date.now()})); }catch(e){} }
+  var st=get();
+  if(st && (st.s==='done' || Date.now()-st.t < AGAIN)) return;
+
+  var shown=false, last=null, timer;
+  function trigger(){
+    if(shown) return;
+    if(spinning || document.hidden){ setTimeout(trigger, 1500); return; }  // never cut off a pull
+    shown=true; clearTimeout(timer); removeEventListener('scroll', onScroll);
+    put('shown');
+    last=document.activeElement;
+    es.classList.add('open'); es.setAttribute('aria-hidden','false');
+    setTimeout(function(){ try{ inp.focus({preventScroll:true}); }catch(e){ inp.focus(); } }, 60);
+  }
+  function close(){
+    if(!es.classList.contains('open')) return;
+    es.classList.remove('open'); es.setAttribute('aria-hidden','true');
+    if(!es.classList.contains('ok')) put('dismissed');
+    if(last && last.focus) try{ last.focus({preventScroll:true}); }catch(e){}
+  }
+  // halfway through the tools: the open shelf's midpoint has scrolled into view,
+  // or (shelf closed) half the page has been scrolled
+  function onScroll(){
+    var d=document.querySelector('#inv details'), y=scrollY+innerHeight;
+    if(d && d.open){
+      var r=d.getBoundingClientRect();
+      if(innerHeight >= r.top + r.height/2) trigger();
+    } else {
+      var max=document.documentElement.scrollHeight-innerHeight;
+      if(max>150 && scrollY/max >= .5) trigger();
+    }
+  }
+  timer=setTimeout(trigger, WAIT);
+  addEventListener('scroll', onScroll, {passive:true});
+
+  es.querySelector('.x').addEventListener('click', close);
+  es.querySelector('.nah').addEventListener('click', close);
+  es.addEventListener('click', function(e){ if(e.target===es) close(); });
+  es.addEventListener('keydown', function(e){
+    e.stopPropagation();                       // space here is typing, not a lever pull
+    if(e.key==='Escape'){ e.preventDefault(); close(); return; }
+    if(e.key==='Tab'){                         // keep focus inside the dialog
+      var f=[].filter.call(sheet.querySelectorAll('button,input:not([tabindex="-1"])'),
+              function(n){ return n.offsetParent!==null; });
+      if(!f.length) return;
+      var a=f[0], z=f[f.length-1];
+      if(e.shiftKey && document.activeElement===a){ e.preventDefault(); z.focus(); }
+      else if(!e.shiftKey && document.activeElement===z){ e.preventDefault(); a.focus(); }
+    }
+  });
+  inp.addEventListener('input', function(){ inp.removeAttribute('aria-invalid'); err.textContent=''; });
+
+  function success(){
+    put('done'); es.classList.add('ok');
+    setTimeout(function(){ es.querySelector('.x').focus(); }, 30);
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v=(inp.value||'').trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){
+      inp.setAttribute('aria-invalid','true'); err.textContent='that email looks off, check it?'; inp.focus(); return;
+    }
+    if(hp.value){ success(); return; }          // a bot filled the hidden field: smile, send nothing
+    go.disabled=true; go.textContent='sending…'; err.textContent='';
+    var fail=function(){
+      go.disabled=false; go.textContent='send me the tools';
+      err.textContent="couldn't save that just now. try again in a sec.";
+    };
+    try{
+      // FormSubmit can take 20-40s to answer; give up at 60s rather than spin forever
+      var ac=window.AbortController?new AbortController():null;
+      if(ac) setTimeout(function(){ ac.abort(); }, 60000);
+      fetch(SIGNUP_ENDPOINT, {
+        method:'POST', signal:ac?ac.signal:undefined,
+        headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+        body:JSON.stringify({email:v, page:location.href.split('#')[0],
+          _subject:'New AI Tool Shuffle signup', _template:'table', _honey:''})
+      }).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){
+        if(r.ok && String(j.success)==='true') success(); else fail();
+      }); }).catch(fail);
+    }catch(x){ fail(); }
+  });
+})();
 </script>
 </body>
 </html>
@@ -829,7 +993,9 @@ document.getElementById('inv').innerHTML =
 
 _out = os.path.join(_here, "index.html")   # write where we read — never the cwd
 _n = len(json.loads(TOYS))   # self-updating count in the prose — never hand-edit again
-open(_out, "w", encoding="utf-8").write(HTML.replace("__TOYS__", TOYS).replace("__N__", str(_n)))
+# Signups from the pop-up are emailed here by FormSubmit (no account, no server).
+SIGNUP_TO = "cuttingthru18@gmail.com"
+open(_out, "w", encoding="utf-8").write(HTML.replace("__TOYS__", TOYS).replace("__N__", str(_n)).replace("__SIGNUP_TO__", SIGNUP_TO))
 print(f"  index.html rebuilt · {_n} tools spliced in untouched")
 
 # The same shelf, in a container a browser is not required to open. The menu bar app
